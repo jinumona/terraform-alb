@@ -1,6 +1,7 @@
 
 #vim main.tf
 
+# security group updated
 module "vpc" {
     
   source = "/home/ec2-user/t-10-lb/vpc-module/"
@@ -29,7 +30,15 @@ resource "aws_security_group" "sg" {
   description = "Allow 80,443,22 traffic"
   vpc_id      = module.vpc.vpc_id
   
-    
+    ingress {
+   
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
   ingress {
    
     from_port        = 80
@@ -146,9 +155,6 @@ resource "aws_lb_listener" "redirect" {
 }
 
 # route 53
-
-
-
 
 #creating A record for blog 
 
