@@ -17,5 +17,10 @@ output "latest-ami-id"{
 }
 
 
+output "security-group-id" {
+
+value = "aws_security_group.sg.id"
+
+}
 
 
